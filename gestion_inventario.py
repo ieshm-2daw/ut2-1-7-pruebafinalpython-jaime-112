@@ -135,12 +135,9 @@ class Inventario:
             
 
     def eliminar(self, codigo):
-        """
-        Elimina un producto del inventario según su código.
-        """
-        # TODO: eliminar el producto de la lista
-        pass
 
+        self.producto = [producto for producto in self.producto if producto.codigo != codigo]
+        
     def valor_total(self):
         """
         Calcula y devuelve el valor total del inventario (precio * stock).
@@ -235,8 +232,20 @@ def main():
 
 
         if opcion == '5':
-            pass
+            codigo = input("Inserte el codigo del producto que desea eliminar: ")
+
+            if inventario.buscar(codigo) == None:
+                print("El codigo no existe o no se escribio bien")
+            
+            else:
+                inventario.eliminar(codigo)
+
+
+            
         if opcion == '6':
+            print("Calcular valor total")
+
+
             pass
         if opcion == '7':
             pass
