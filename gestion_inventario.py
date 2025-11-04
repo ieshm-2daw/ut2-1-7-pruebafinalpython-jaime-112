@@ -139,11 +139,11 @@ class Inventario:
         self.producto = [producto for producto in self.producto if producto.codigo != codigo]
         
     def valor_total(self):
-        """
-        Calcula y devuelve el valor total del inventario (precio * stock).
-        """
-        # TODO: devolver la suma total del valor del stock
-        pass
+        valor = 0
+        for p in self.producto:
+            valor += (p.precio * p.stock)
+        return valor
+ 
 
     def mostrar_por_proveedor(self, nombre_proveedor):
         """
@@ -244,6 +244,8 @@ def main():
             
         if opcion == '6':
             print("Calcular valor total")
+            valor = inventario.valor_total()
+            print(f"El valor total de todos los productos es: {valor}")
 
 
             pass
