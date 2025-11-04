@@ -126,11 +126,13 @@ class Inventario:
 
 
     def modificar(self, codigo, nombre=None, precio=None, stock=None):
-        """
-        Permite modificar los datos de un producto existente.
-        """
-        # TODO: buscar el producto y actualizar sus atributos
-        pass
+
+        for p in self.producto:
+            if p.codigo == codigo:
+                p.nombre = nombre
+                p.precio = precio
+                p.stock = stock
+            
 
     def eliminar(self, codigo):
         """
@@ -203,21 +205,40 @@ def main():
             print("El inventario contiene: ")
             inventario.mostrar()
 
-        if opcion == 3:
+        if opcion == '3':
             codigo = input("Inserte el codigo del producto que desea buscar: ")
 
             prodct = inventario.buscar(codigo)
 
             prodct.__str__()
             
-        if opcion == 4:
-            pass
+        if opcion == '4':
+            print("Vamos a modificar un producto\n")
+            codigo = input("Inserte el codigo del producto que desea actualizar: ")
 
-        if opcion == 5:
+            if inventario.buscar(codigo) == None:
+                print("El codigo no es el adecuado o no existe ese producto")
+
+            else:
+                pr = inventario.buscar(codigo)
+                print("Recuerde si pulsa enter se queda como está\n")
+                nuevo_nombre = input("Inserte el nuevo nombre: ")
+                nuevo_stock = int(input("Inserte el nuevo stock: "))
+                nuevo_precio = input("Inserte el nuevo precio: ")
+
+                print(pr)
+
+                inventario.modificar(codigo,nuevo_nombre or pr.nombre,
+                                      float(nuevo_precio) or pr.precio,
+                                      nuevo_stock or pr.stock)
+
+
+
+        if opcion == '5':
             pass
         if opcion == '6':
             pass
-        if opcion == 7:
+        if opcion == '7':
             pass
         if opcion == '8':
             inventario.guardar()
