@@ -106,6 +106,7 @@ class Inventario:
         else: self.producto.append(producto)
 
         print(producto)
+
     def mostrar(self):
         
         for pro in self.producto:
@@ -113,17 +114,11 @@ class Inventario:
 
     def buscar(self, codigo):
 
-
         for producto in self.producto:
             if producto.codigo == codigo:
                 return producto
             
         else: return None
-        """
-        Devuelve el producto con el código indicado, o None si no existe.
-        """
-        # TODO: buscar un producto por código
-
 
     def modificar(self, codigo, nombre=None, precio=None, stock=None):
 
@@ -143,15 +138,12 @@ class Inventario:
         for p in self.producto:
             valor += (p.precio * p.stock)
         return valor
- 
 
     def mostrar_por_proveedor(self, nombre_proveedor):
-        """
-        Muestra todos los productos de un proveedor determinado.
-        Si no existen productos de ese proveedor, mostrar un mensaje.
-        """
-        # TODO: filtrar y mostrar los productos de un proveedor concreto
-        pass
+        for p in self.producto:
+            if p.proveedor.nombre == nombre_proveedor:
+                print(p)
+        else: print("No se encontro el producto")
 
 
 # ======================================================
@@ -189,10 +181,10 @@ def main():
 
             codigopro = input("Inserte el codigo del proveedor: ")
             nproveedor = input("Inserte el nombre del proveedor: ")
-            contacto = input("Inserte el contacto del proveedor: ")
+            contactopro = input("Inserte el contacto del proveedor: ")
             
             if inventario.buscar(codigop) == None:
-                produc = Producto(codigop,nombre,precio,stock,proveedor = Proveedor(codigopro,nproveedor,contacto))
+                produc = Producto(codigop,nombre,precio,stock,proveedor = Proveedor(codigopro,nproveedor,contactopro))
                 inventario.anadir_producto(produc)
                 print("Se inserto el producto")
             else: print("El codigo del producto ya existe")
@@ -248,9 +240,13 @@ def main():
             print(f"El valor total de todos los productos es: {valor}")
 
 
-            pass
         if opcion == '7':
-            pass
+            print("Mostrar Productos de un proveedor")
+            nombrep = input("Inserte el nombre del proveedor: ")
+
+            inventario.mostrar_por_proveedor(nombrep)
+
+
         if opcion == '8':
             inventario.guardar()
             print ("Cerrando menu")
